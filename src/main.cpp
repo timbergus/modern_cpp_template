@@ -4,13 +4,15 @@
 #include "my_lib.h"
 
 int main(int, char **) {
-  auto result = my_lib::take_half_if_even("6");
+  std::string input = "6";
+
+  auto result = my_lib::take_half_if_even(input);
 
   if (result) {
     auto number = result.value();
 
     if (number) {
-      std::println("Half of 4 is: {}", number.value());
+      std::println("Half of {} is {} 😄", input, number.value());
     } else {
       std::println("The number is odd!");
     }

@@ -2,3 +2,5 @@
 .cache/
 build/
 docs/
+_CPack*
+*.zip

@@ -22,4 +22,4 @@ package: project documentation
 	cpack -G ZIP --config $(BUILD)/CPackConfig.cmake
 
 clean:
-	rm -rf $(BUILD) .cache docs
+	rm -rf $(BUILD) .cache docs _CPack* *.zip
