@@ -1,5 +1,5 @@
 BUILD=build
-PROJECT=modern_cpp_playground
+PROJECT=modern_cpp_template
 
 init:
 	cmake -B $(BUILD) \

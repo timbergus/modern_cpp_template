@@ -13,11 +13,13 @@ To use it, clone the repository and open it in your favorite IDE. You can then b
 
 ## Getting Started
 
-1. Clone the repository
-2. Replace name and description in `CMakeLists.txt` file to personalize your distribution.
-3. Run the example with `make start`. It will init and build the project, and run the example code.
-4. Modify the example code in the `src` directory to experiment with different C++ features.
-5. Package your project for distribution using `make package`.
+1. Clone the repository.
+2. Change project name in `CMakeLists.txt` and `Makefile`.
+3. Replace author's name and project description in `CMakeLists.txt` file to personalize your distribution.
+4. Run the example with `make start`. It will init and build the project, and run the example code.
+5. Modify the example code in the `src` directory to experiment with different C++ features.
+6. Create your project documentation using `make documentation`.
+7. Package your project for distribution using `make package`.
 
 ## C++ Properties (c_cpp_properties.json)
 
@@ -37,3 +39,9 @@ To use it, clone the repository and open it in your favorite IDE. You can then b
   "version": 4
 }
 ```
+
+## Resources
+
+- [CMake Documentation](https://cmake.org/documentation/)
+- [Doxygen Documentation](https://www.doxygen.nl/manual/index.html)
+- [CPack Documentation](https://cmake.org/cmake/help/latest/module/CPack.html)
