@@ -21,6 +21,14 @@ To use it, clone the repository and open it in your favorite IDE. You can then b
 6. Create your project documentation using `make documentation`.
 7. Package your project for distribution using `make package`.
 
+## Included Libraries
+
+- fmt: A modern formatting library for C++.
+- my_ho_lib: A custom header-only library.
+- my_lib: A custom static library.
+
+It includes fmt to include the downloading system for commercial libraries. It will be downloaded automatically from GitHub and linked to your project.
+
 ## C++ Properties (c_cpp_properties.json)
 
 ```json

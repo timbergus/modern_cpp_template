@@ -12,14 +12,30 @@ set(DESCRIPTION "Your project description here")
 
 add_compile_options(-Wall -Wextra -Werror -Wpedantic)
 
-# >>> Include your own library
+include(FetchContent)
+
+# >>> fmt library download
+FetchContent_Declare(
+  fmt
+  GIT_REPOSITORY https://github.com/fmtlib/fmt.git
+  GIT_TAG 11.2.0
+)
+FetchContent_MakeAvailable(fmt)
+# <<< fmt library download
+
+# >>> Include your header only library
+add_library(my_ho_lib INTERFACE)
+target_include_directories(my_ho_lib INTERFACE src/include)
+# <<< Include your header only library
+
+# >>> Include your static library
 add_library(my_lib STATIC src/lib/my_lib.cpp)
 target_include_directories(my_lib PUBLIC src/include)
-# <<< Include your own library
+# <<< Include your static library
 
 add_executable(${PROJECT_NAME} src/main.cpp)
 
-target_link_libraries(${PROJECT_NAME} PRIVATE my_lib)
+target_link_libraries(${PROJECT_NAME} PRIVATE fmt::fmt my_lib my_ho_lib)
 
 include(CTest)
 enable_testing()
