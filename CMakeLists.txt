@@ -41,9 +41,6 @@ add_executable(${PROJECT_NAME} src/main.cpp)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE fmt::fmt my_lib my_ho_lib)
 
-include(CTest)
-enable_testing()
-
 # >>> Doxygen setup
 find_package(Doxygen REQUIRED)
 
@@ -85,3 +82,16 @@ set(CPACK_GENERATOR "ZIP")
 set(CPACK_PACKAGE_FILE_NAME "${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION}")
 include(CPack)
 # <<< CPACK
+
+# >>> Testing
+include(CTest)
+enable_testing()
+
+add_executable(congratulate_test ${CMAKE_SOURCE_DIR}/src/tests/congratulate_test.cpp)
+target_link_libraries(congratulate_test fmt::fmt my_ho_lib)
+
+add_test(
+  NAME congratulate_test
+  COMMAND $<TARGET_FILE:congratulate_test>
+)
+# <<< Testing
