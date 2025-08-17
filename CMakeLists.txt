@@ -69,7 +69,7 @@ if (DOXYGEN_FOUND)
 endif()
 # <<< Doxygen setup
 
-# >>> CPACK
+# >>> CPack
 include(InstallRequiredSystemLibraries)
 
 install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION bin)
@@ -81,7 +81,7 @@ set(CPACK_PACKAGE_VENDOR ${PROJECT_AUTHOR})
 set(CPACK_GENERATOR "ZIP")
 set(CPACK_PACKAGE_FILE_NAME "${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION}")
 include(CPack)
-# <<< CPACK
+# <<< CPack
 
 # >>> Testing
 include(CTest)
