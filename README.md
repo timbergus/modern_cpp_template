@@ -1,15 +1,17 @@
-# Modern C++ Playground
+# Modern C++ Template
 
-A playground for experimenting with modern C++ features and libraries. It can be used as template for your own projects.
+A template for experimenting with modern C++ features and libraries. It can be used as a starting point for your own projects.
 
-To use it, clone the repository and open it in your favorite IDE. You can then build and run the example code provided in the `src` directory.
+To use it, in GitHub, click on "Use this template" button.
+
+Then, clone the new repository and open it in your favorite IDE. You can then build and run the example code provided in the `src` directory.
 
 ## Requirements
 
-- C++23 compatible compiler
-- Make for tooling
-- CMake for building
-- VSCode with C++ extension
+- C++23 compatible compiler.
+- Make for tooling.
+- CMake for building.
+- VSCode with C++ extension.
 
 ## Getting Started
 
@@ -23,13 +25,15 @@ To use it, clone the repository and open it in your favorite IDE. You can then b
 
 ## Included Libraries
 
-- fmt: A modern formatting library for C++.
-- my_ho_lib: A custom header-only library.
-- my_lib: A custom static library.
+- **fmt**: A modern formatting library for C++.
+- **my_ho_lib**: A custom header-only library.
+- **my_lib**: A custom static library.
 
 It includes fmt to include the downloading system for commercial libraries. It will be downloaded automatically from GitHub and linked to your project.
 
-## C++ Properties (c_cpp_properties.json)
+## C++ Properties
+
+You can define this properties into `.vscode/c_cpp_properties.json`.
 
 ```json
 {
