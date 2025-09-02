@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <print>
 
+#include "fmt/base.h"
 #include "my_ho_lib.h"
 #include "my_lib.h"
 
@@ -31,7 +32,7 @@ int main(int, char **) {
     return EXIT_FAILURE;
   }
 
-  my_ho_lib::congratulate();
+  fmt::println("{}", my_ho_lib::congratulate("USER"));
 
   return EXIT_SUCCESS;
 }

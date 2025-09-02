@@ -20,8 +20,8 @@ inline void title(std::string_view title) {
  * @brief Prints a congratulatory message.
  * @return  void
  */
-inline void congratulate() {
-  fmt::print(fg(fmt::color::chartreuse) | fmt::emphasis::bold,
-             "Congrats for making it this far!\n");
+inline std::string congratulate(std::string_view name) {
+  return fmt::format(fg(fmt::color::chartreuse) | fmt::emphasis::bold,
+                     "Congrats {} for making it this far!", name);
 }
 } // namespace my_ho_lib

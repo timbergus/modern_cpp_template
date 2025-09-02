@@ -43,21 +43,27 @@ FetchContent_Declare(
   GIT_REPOSITORY
     https://github.com/timbergus/cnmea.git
   GIT_TAG
-    v0.0.10
+    v0.0.11
 )
 FetchContent_MakeAvailable(cnmea)
 # <<< cnmea library download
+
+# >>> Catch2 library download
+FetchContent_Declare(
+  Catch2
+  GIT_REPOSITORY
+    https://github.com/catchorg/Catch2.git
+  GIT_TAG
+    v3.10.0
+)
+FetchContent_MakeAvailable(Catch2)
+# <<< Catch2 library download
 
 # >>> Include your header only library
 add_library(my_ho_lib INTERFACE)
 add_library(my_ho_lib::my_ho_lib
   ALIAS
     my_ho_lib
-)
-
-target_compile_features(my_ho_lib
-  INTERFACE
-    cxx_std_23
 )
 
 target_compile_options(my_ho_lib
@@ -76,11 +82,6 @@ add_library(my_lib STATIC src/lib/my_lib.cpp)
 add_library(my_lib::my_lib
   ALIAS
     my_lib
-)
-
-target_compile_features(my_lib
-  PUBLIC
-    cxx_std_23
 )
 
 target_compile_options(my_lib
@@ -153,13 +154,15 @@ include(CPack)
 
 # >>> Testing
 include(CTest)
+include(Catch)
 enable_testing()
 
 add_executable(congratulate_test ${CMAKE_SOURCE_DIR}/src/tests/congratulate_test.cpp)
-target_link_libraries(congratulate_test fmt::fmt my_ho_lib)
-
-add_test(
-  NAME congratulate_test
-  COMMAND $<TARGET_FILE:congratulate_test>
+target_link_libraries(congratulate_test
+  fmt::fmt
+  my_ho_lib::my_ho_lib
+  Catch2::Catch2WithMain
 )
+
+catch_discover_tests(congratulate_test)
 # <<< Testing
