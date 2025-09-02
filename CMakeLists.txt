@@ -1,45 +1,113 @@
-cmake_minimum_required(VERSION 4.1.0)
+cmake_minimum_required(VERSION 4.1.1)
 project(
   modern_cpp_template
-  VERSION 0.1.0
-  DESCRIPTION "Your project description here"
-  LANGUAGES C CXX
+  VERSION
+    0.1.0
+  DESCRIPTION
+    "Your project description here"
+  LANGUAGES
+    C
+    CXX
 )
 
 # Use your own name.
-set(PROJECT_AUTHOR "Your name here")
+set(
+  PROJECT_AUTHOR
+    "Your name here"
+)
 
-set(CMAKE_CXX_STANDARD 26)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-
-add_compile_options(-Wall -Wextra -Werror -Wpedantic)
+set(
+  MY_WARNINGS
+    -Wall
+    -Wextra
+    -Wpedantic
+    -Werror
+)
 
 include(FetchContent)
 
 # >>> fmt library download
 FetchContent_Declare(
   fmt
-  GIT_REPOSITORY https://github.com/fmtlib/fmt.git
-  GIT_TAG 11.2.0
+  GIT_REPOSITORY
+    https://github.com/fmtlib/fmt.git
+  GIT_TAG
+    11.2.0
 )
 FetchContent_MakeAvailable(fmt)
 # <<< fmt library download
 
+# >>> cnmea library download
+FetchContent_Declare(
+  cnmea
+  GIT_REPOSITORY
+    https://github.com/timbergus/cnmea.git
+  GIT_TAG
+    v0.0.10
+)
+FetchContent_MakeAvailable(cnmea)
+# <<< cnmea library download
+
 # >>> Include your header only library
 add_library(my_ho_lib INTERFACE)
-target_include_directories(my_ho_lib INTERFACE src/include)
+add_library(my_ho_lib::my_ho_lib
+  ALIAS
+    my_ho_lib
+)
+
+target_compile_features(my_ho_lib
+  INTERFACE
+    cxx_std_23
+)
+
+target_compile_options(my_ho_lib
+  INTERFACE
+    ${MY_WARNINGS}
+)
+
+target_include_directories(my_ho_lib
+  INTERFACE
+    src/include
+)
 # <<< Include your header only library
 
 # >>> Include your static library
 add_library(my_lib STATIC src/lib/my_lib.cpp)
-target_include_directories(my_lib PUBLIC src/include)
+add_library(my_lib::my_lib
+  ALIAS
+    my_lib
+)
+
+target_compile_features(my_lib
+  PUBLIC
+    cxx_std_23
+)
+
+target_compile_options(my_lib
+  PUBLIC
+    ${MY_WARNINGS}
+)
+
+target_include_directories(my_lib
+  PUBLIC
+    src/include
+)
 # <<< Include your static library
 
 add_executable(${PROJECT_NAME} src/main.cpp)
 
-target_link_libraries(${PROJECT_NAME} PRIVATE fmt::fmt my_lib my_ho_lib)
+target_compile_options(${PROJECT_NAME}
+  PRIVATE
+    ${MY_WARNINGS}
+)
+
+target_link_libraries(${PROJECT_NAME}
+  PRIVATE
+    cnmea::cnmea
+    fmt::fmt
+    my_lib::my_lib
+    my_ho_lib::my_ho_lib
+)
 
 # >>> Doxygen setup
 find_package(Doxygen REQUIRED)
@@ -55,7 +123,7 @@ if (DOXYGEN_FOUND)
 
   configure_file(${DOXYGEN_IN} ${DOXYGEN_OUT} @ONLY)
 
-  add_custom_target(docs
+  add_custom_target(${PROJECT_NAME}_docs
     COMMAND ${DOXYGEN_EXECUTABLE} ${DOXYGEN_OUT}
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
     COMMENT "Generating API documentation with Doxygen"

@@ -9,11 +9,18 @@
  */
 namespace my_ho_lib {
 /**
+ * @brief Prints a title.
+ * @return  void
+ */
+inline void title(std::string_view title) {
+  fmt::print(fg(fmt::color::chartreuse) | fmt::emphasis::bold, "{}\n", title);
+}
+
+/**
  * @brief Prints a congratulatory message.
  * @return  void
  */
 inline void congratulate() {
-  // Function implementation goes here
   fmt::print(fg(fmt::color::chartreuse) | fmt::emphasis::bold,
              "Congrats for making it this far!\n");
 }

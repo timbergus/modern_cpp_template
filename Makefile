@@ -1,19 +1,19 @@
 BUILD=build
+BUILD_TYPE ?= debug
 PROJECT=modern_cpp_template
 
+# To execute it with a different value you can use make BUILD_TYPE=release
 init:
-	cmake -B $(BUILD) \
-  	-DCMAKE_C_COMPILER=/opt/homebrew/opt/llvm/bin/clang \
-  	-DCMAKE_CXX_COMPILER=/opt/homebrew/opt/llvm/bin/clang++
+	cmake --preset=$(BUILD_TYPE)
 
 project: init
-	cmake --build $(BUILD) --config Release
+	cmake --build $(BUILD)
 
 start: project
 	./$(BUILD)/$(PROJECT)
 
 documentation: project
-	cmake --build $(BUILD) --target docs
+	cmake --build $(BUILD) --target ${PROJECT}_docs
 
 test: project
 	ctest --test-dir $(BUILD)

@@ -1,3 +1,4 @@
+#include <cnmea/cnmea.h>
 #include <cstdlib>
 #include <print>
 
@@ -5,8 +6,16 @@
 #include "my_lib.h"
 
 int main(int, char **) {
+  my_ho_lib::title("This is a NMEA sample");
+
+  auto sample =
+      cnmea::parse("$GNGLL,3150.788156,N,11711.922383,E,062735.00,A,A*76");
+
+  cnmea::print(sample.value());
+
   std::string input = "6";
 
+  my_ho_lib::title("And this tests one of the libraries");
   auto result = my_lib::take_half_if_even(input);
 
   if (result) {
