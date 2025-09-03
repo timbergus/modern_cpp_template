@@ -25,8 +25,10 @@ include(FetchContent)
 
 # >>> fmt library download
 find_package(fmt CONFIG QUIET)
-if (NOT fmt_FOUND)
-  message(STATUS "fmt not found, fetching from GitHub...")
+if (fmt_FOUND)
+  message(STATUS "fmt ---> found")
+else()
+  message(STATUS "fmt ---> not found, fetching from GitHub...")
 
   FetchContent_Declare(
     fmt
@@ -39,13 +41,15 @@ endif()
 
 # >>> cnmea library download
 find_package(cnmea CONFIG QUIET)
-if (NOT cnmea_FOUND)
-  message(STATUS "cnmea not found, fetching from GitHub...")
+if (cnmea_FOUND)
+  message(STATUS "cnmea ---> found")
+else()
+  message(STATUS "cnmea ---> not found, fetching from GitHub...")
 
   FetchContent_Declare(
     cnmea
     GIT_REPOSITORY https://github.com/timbergus/cnmea.git
-    GIT_TAG v0.0.11
+    GIT_TAG v0.0.12
   )
   FetchContent_MakeAvailable(cnmea)
 endif()
@@ -53,8 +57,10 @@ endif()
 
 # >>> Catch2 library download
 find_package(Catch2 CONFIG QUIET)
-if (NOT Catch2_FOUND)
-  message(STATUS "Catch2 not found, fetching from GitHub...")
+if (Catch2_FOUND)
+  message(STATUS "Catch2 ---> found")
+else()
+  message(STATUS "Catch2 ---> not found, fetching from GitHub...")
 
   FetchContent_Declare(
     Catch2
@@ -102,9 +108,11 @@ target_link_libraries(${PROJECT_NAME}
 )
 
 # >>> Documentation (optional if Doxygen not installed)
-find_package(Doxygen CONFIG QUIET)
+find_package(Doxygen QUIET)
 
 if (DOXYGEN_FOUND)
+  message(STATUS "Doxygen ---> found")
+
   set(DOXYGEN_OUTPUT_DIR ${CMAKE_SOURCE_DIR}/docs)
   set(DOXYGEN_INPUT_DIR ${CMAKE_SOURCE_DIR}/src)
 
@@ -127,7 +135,7 @@ if (DOXYGEN_FOUND)
     COMPONENT docs
   )
 else()
-  message(STATUS "Doxygen not found, skipping documentation target")
+  message(STATUS "Doxygen ---> not found, skipping documentation target")
 endif()
 # <<< Documentation (optional if Doxygen not installed)
 
